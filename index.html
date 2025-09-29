@@ -147,103 +147,92 @@ footer{ text-align:center; color:#64748b; padding:20px 10px }
 </div>
 
 <script>
-/* ===================== بيانات الدروس (يمكن تعديلها بسهولة) ===================== */
-/* ملحوظة: حافظ على paths بما يطابق هيكل المجلدات في المستودع. */
+/* ===================== بيانات الدروس بروابط GitHub Pages ===================== */
+const PAGES_ROOT = "https://a7mdooh.github.io/Interactive-Lessons";
 const LESSONS = [
-  /* الصف الخامس (أمثلة مبدئية قابلة للتحديث) */
+  /* الصف الخامس */
   {
-    grade:5,
+    grade:5, topic:"الأمن الرقمي",
     title:"المواطنة الرقمية الأساسية",
-    topic:"الأمن الرقمي",
-    path:"Interactive Lessons/5th/Digital-Citizenship/index.html",
+    path:`${PAGES_ROOT}/5th/Digital-Citizenship/index.html`,
     desc:"مبادئ الهوية الرقمية، كلمات المرور، السلوك اللائق عبر الإنترنت.",
     tags:["هوية رقمية","أمن","سلوك"]
   },
 
   /* الصف السادس */
   {
-    grade:6,
+    grade:6, topic:"الجداول الحسابية",
     title:"الجداول الحسابية – تنظيم البيانات",
-    topic:"الجداول الحسابية",
-    path:"Interactive Lessons/6th/Spreadsheets/index.html",
+    path:`${PAGES_ROOT}/6th/Spreadsheets/index.html`,
     desc:"تنسيق الخلايا، الدوال الأساسية، الفرز والتصفية.",
     tags:["Excel","تنظيم البيانات","دوال"]
   },
   {
-    grade:6,
+    grade:6, topic:"الوسائط المتعددة",
     title:"النمذجة ثلاثية الأبعاد – مقدمة",
-    topic:"الوسائط المتعددة",
-    path:"Interactive Lessons/6th/3D-Modeling/index.html",
+    path:`${PAGES_ROOT}/6th/3D-Modeling/index.html`,
     desc:"مفاهيم النمذجة باستخدام Tinkercad وأنشطة تطبيقية.",
     tags:["3D","تصميم","Tinkercad"]
   },
   {
-    grade:6,
+    grade:6, topic:"الشبكات والتواصل",
     title:"الشبكات والأدوات – الإنترنت والتواصل",
-    topic:"الشبكات والتواصل",
-    path:"Interactive Lessons/6th/Networks-and-Tools/index.html",
+    path:`${PAGES_ROOT}/6th/Networks-and-Tools/index.html`,
     desc:"مفاهيم أساسية للإنترنت وأدوات التعاون.",
     tags:["شبكات","تواصل","إنترنت"]
   },
 
   /* الصف السابع */
   {
-    grade:7,
+    grade:7, topic:"اختيار الحاسوب",
     title:"أسس اختيار الحاسوب الشخصي",
-    topic:"اختيار الحاسوب",
-    path:"Interactive Lessons/7th/Choose-a-PC/index.html",
+    path:`${PAGES_ROOT}/7th/Choose-a-PC/index.html`,
     desc:"معالج، ذاكرة، تخزين، شاشة، بطاقة رسومية—كيف تختار حسب احتياجك.",
     tags:["CPU","RAM","Storage"]
   },
   {
-    grade:7,
+    grade:7, topic:"الوسائط المتعددة",
     title:"تحرير الوسائط – الصوت والفيديو",
-    topic:"الوسائط المتعددة",
-    path:"Interactive Lessons/7th/Multimedia-Editing/index.html",
+    path:`${PAGES_ROOT}/7th/Multimedia-Editing/index.html`,
     desc:"مراحل إنتاج فيلم قصير، التحرير الصوتي والمرئي.",
     tags:["MovieMaker","Audacity","إنتاج"]
   },
   {
-    grade:7,
+    grade:7, topic:"الأمن الرقمي",
     title:"الخدمات الإلكترونية والأمن",
-    topic:"الأمن الرقمي",
-    path:"Interactive Lessons/7th/E-Services-and-Security/index.html",
+    path:`${PAGES_ROOT}/7th/E-Services-and-Security/index.html`,
     desc:"التسوق الإلكتروني، تقييم المعلومات، الوعي الأمني.",
     tags:["E-Services","Security"]
   },
 
   /* الصف الثامن */
   {
-    grade:8,
+    grade:8, topic:"الشبكات والتواصل",
     title:"الاستخدام الآمن لوسائل التواصل",
-    topic:"الشبكات والتواصل",
-    path:"Interactive Lessons/8th/Social Media/safe-social.html",
+    path:`${PAGES_ROOT}/8th/Social%20Media/safe-social.html`,
     desc:"مخاطر التواصل وطرق الحماية + أنشطة تفاعلية واختبار 10 أسئلة.",
     tags:["تواصل اجتماعي","أمن","2FA","تنمر"]
   },
   {
-    grade:8,
+    grade:8, topic:"البرمجة/المنطق",
     title:"أساسيات البرمجة والمنطق",
-    topic:"البرمجة/المنطق",
-    path:"Interactive Lessons/8th/Programming-Basics/index.html",
+    path:`${PAGES_ROOT}/8th/Programming-Basics/index.html`,
     desc:"مفاهيم المتغيرات، الشروط، والحلقات بأسلوب بصري.",
     tags:["Logic","Variables","Loops"]
   },
 
   /* الصف التاسع */
   {
-    grade:9,
+    grade:9, topic:"قواعد البيانات",
     title:"قواعد البيانات – الجداول والعلاقات",
-    topic:"قواعد البيانات",
-    path:"Interactive Lessons/9th/Databases/index.html",
+    path:`${PAGES_ROOT}/9th/Databases/index.html`,
     desc:"التخطيط لقاعدة بيانات، العلاقات، الاستعلامات، التقارير.",
     tags:["Access","Relations","Queries"]
   },
   {
-    grade:9,
+    grade:9, topic:"الشبكات والتواصل",
     title:"محاكاة الشبكات وأمنها",
-    topic:"الشبكات والتواصل",
-    path:"Interactive Lessons/9th/Networks/index.html",
+    path:`${PAGES_ROOT}/9th/Networks/index.html`,
     desc:"Packet Tracer، ربط الأجهزة، أساسيات أمن الشبكات.",
     tags:["Networks","Security","PT"]
   }
@@ -260,6 +249,7 @@ function render(list){
   list.forEach(item=>{
     const card = document.createElement("article");
     card.className = "card span-6";
+    const folderUrl = item.path.substring(0, item.path.lastIndexOf('/'));
     card.innerHTML = `
       <div class="badge-grade">الصف ${item.grade}</div>
       <h3>${item.title}</h3>
@@ -269,8 +259,8 @@ function render(list){
       </div>
       <div class="desc">${item.desc}</div>
       <div class="actions">
-        <a class="btn btn-primary" href="${encodeURI(item.path)}">🚀 فتح الدرس</a>
-        <a class="btn" href="${encodeURI(item.path.substring(0,item.path.lastIndexOf('/')))}">📁 فتح المجلد</a>
+        <a class="btn btn-primary" href="${item.path}" target="_blank" rel="noopener">🚀 فتح الدرس</a>
+        <a class="btn" href="${folderUrl}" target="_blank" rel="noopener">📁 فتح المجلد</a>
       </div>
     `;
     cardsEl.appendChild(card);
@@ -285,13 +275,7 @@ document.getElementById("btnSearch").onclick = applyFilters;
 document.getElementById("reset").onclick = ()=>{
   q.value=""; gradeFilter.value=""; topicFilter.value=""; applyFilters();
 };
-
-[q, gradeFilter, topicFilter].forEach(el=>{
-  el.addEventListener("input", ()=> {
-    // تخفيف فلاتر فوري
-    applyFilters();
-  });
-});
+[q, gradeFilter, topicFilter].forEach(el=> el.addEventListener("input", applyFilters));
 
 function applyFilters(){
   const term = (q.value||"").trim().toLowerCase();

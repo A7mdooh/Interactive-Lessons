@@ -3,30 +3,708 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>الدروس التفاعلية – تقنية المعلومات (٥–٩)</title>
+<title>الاستخدام الآمن لوسائل التواصل الاجتماعي — محتوى تفاعلي ذكي</title>
+
+<!-- خط عربي احترافي -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-body{font-family:"Cairo",sans-serif;background:#f0f9ff;margin:0;padding:0;color:#0f172a}
-header{text-align:center;padding:20px}
-h1{background:linear-gradient(90deg,#06b6d4,#a855f7);-webkit-background-clip:text;color:transparent;font-size:32px}
-.container{width:90%;margin:auto}
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-.btn{display:inline-block;padding:8px 12px;border-radius:8px;background:#a5f3fc;text-decoration:none;color:#000;font-weight:bold}
+/* ============ لوحة ألوان فاتحة ومبهجة ============ */
+:root{
+  --bg-1:#f0f9ff;      /* سماوي فاتح */
+  --bg-2:#fff7ed;      /* برتقالي كريمي خفيف */
+  --bg-3:#fdf2f8;      /* وردي فاتح */
+  --ink:#0f172a;       /* نص غامق مقروء */
+  --muted:#475569;     /* نص ثانوي */
+  --brand:#06b6d4;     /* سماوي */
+  --brand-2:#a855f7;   /* بنفسجي */
+  --accent:#22c55e;    /* أخضر */
+  --danger:#ef4444;    /* أحمر */
+  --warn:#f59e0b;      /* عنبري */
+  --card:#ffffff;      /* خلفية البطاقة */
+  --ring:#e2e8f0;      /* حدود لطيفة */
+  --radius:26px;
+  --shadow:0 24px 50px rgba(15, 23, 42, .12);
+}
+
+/* ============ الأساسيات ============ */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1400px 900px at 110% -10%, var(--bg-3) 0%, transparent 60%),
+    radial-gradient(1200px 800px at -10% 110%, var(--bg-2) 0%, transparent 60%),
+    linear-gradient(120deg, var(--bg-1), #ffffff 50%, var(--bg-1));
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* قماش زخرفي بسيط (نقاط شفافة) */
+body:before{
+  content:"";
+  position:fixed; inset:0;
+  background-image: radial-gradient(#0000000f 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events:none; opacity:.5;
+}
+
+header{ text-align:center; padding:32px 18px 10px }
+h1{
+  margin:0 0 6px 0;
+  font-size:clamp(30px,4.4vw,56px);
+  font-weight:900;
+  letter-spacing:.2px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 10px 16px rgba(6,182,212,.12));
+}
+.subtitle{ color:var(--muted); font-size:clamp(16px,2.5vw,20px) }
+
+.container{ width:min(1220px,92vw); margin:22px auto 110px }
+
+/* شريط أدوات */
+.toolbar{
+  display:flex; gap:14px; justify-content:space-between; align-items:center;
+  background:linear-gradient(180deg, #ffffffcc, #ffffff);
+  border:1px solid var(--ring);
+  padding:14px 18px; border-radius:20px; box-shadow:var(--shadow);
+}
+.badges{display:flex; gap:10px; flex-wrap:wrap}
+.badge{
+  background:linear-gradient(90deg, #cffafe, #fae8ff);
+  border:1px solid #e9ecef; color:#0b3b4f;
+  padding:10px 14px; border-radius:999px; font-weight:800; font-size:15px;
+}
+.soundbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.hint{
+  font-size:15px; color:#0b3b4f;
+  background:linear-gradient(90deg, #e0f2fe, #f3e8ff);
+  border:1px solid #e9ecef; padding:6px 10px; border-radius:10px; display:inline-flex; gap:8px; align-items:center
+}
+button,.btn{
+  appearance:none; border:0; cursor:pointer;
+  color:#0b3b4f; background:#ffffff; border:1px solid #e9ecef;
+  padding:12px 16px; border-radius:14px; font-weight:800;
+  transition:.25s transform,.25s box-shadow,.25s background;
+  font-size:clamp(15px,1.6vw,18px)
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:0 10px 20px rgba(2,132,199,.15) }
+.btn-primary{ background:linear-gradient(90deg, #a5f3fc, #e9d5ff) }
+
+/* شبكة البطاقات (أكبر + تسلسلية) */
+.flow{ display:flex; flex-direction:column; gap:26px; margin-top:22px }
+.card{
+  background:var(--card);
+  border:1px solid var(--ring);
+  border-radius:var(--radius);
+  padding:26px 24px 22px;
+  box-shadow:var(--shadow);
+}
+.card h2{
+  margin:0 0 12px 0;
+  font-size:clamp(24px,2.8vw,34px);
+  font-weight:900; display:flex; align-items:center; gap:12px;
+}
+.card h2 .step{
+  display:inline-grid; place-items:center;
+  width:48px; height:48px; border-radius:14px;
+  background:linear-gradient(135deg, #a5f3fc, #e9d5ff);
+  color:#0f172a; font-weight:900; border:1px solid #e9ecef;
+}
+.card p, .card li{ font-size:clamp(18px,2vw,21px) }
+.list{ margin:10px 4px 6px 0 }
+
+.pills{ display:flex; flex-wrap:wrap; gap:10px; margin:12px 2px 2px }
+.pill{
+  padding:10px 12px; border-radius:999px;
+  background:linear-gradient(90deg, #dcfce7, #cffafe);
+  border:1px solid #e9ecef; font-weight:800; font-size:16px; color:#064e3b
+}
+
+/* عناصر تفاعلية عامة */
+.activity{
+  background:linear-gradient(180deg, #ffffff, #f8fafc);
+  border:1px solid #e9ecef;
+  padding:14px; border-radius:16px; transition:.25s transform
+}
+.activity:hover{ transform:translateY(-4px) }
+.tag{ font-size:14px; color:#065f46; background:#d1fae5; border:1px solid #bbf7d0; padding:4px 8px; border-radius:999px; font-weight:800 }
+
+.kbd{ font-family:ui-monospace,Menlo,Consolas,monospace; background:#eff6ff; border:1px solid #e9ecef; padding:2px 6px; border-radius:6px }
+
+/* حائط أفكار (العصف الذهني) */
+.wall{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px }
+.chip{
+  background:linear-gradient(90deg,#e0f2fe,#f3e8ff);
+  border:1px solid #e9ecef; padding:8px 10px; border-radius:999px; font-weight:800;
+  display:inline-flex; gap:8px; align-items:center
+}
+.chip small{ color:#64748b; font-weight:900 }
+.chip .x{ cursor:pointer; opacity:.7 }
+
+/* شريط تقدم/مقياس أمان */
+.meter{height:14px; width:100%; background:#f1f5f9; border-radius:999px; overflow:hidden; border:1px solid #e2e8f0}
+.meter .v{height:100%; width:0; background:linear-gradient(90deg,#86efac,#22c55e);}
+
+/* بطاقات قلبية (آمن/غير آمن) */
+.flipgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px }
+.flip{
+  perspective:1200px; position:relative; height:160px;
+}
+.flip .inner{
+  position:absolute; inset:0; border:1px solid #e9ecef; border-radius:16px; transform-style:preserve-3d; transition:transform .6s;
+  background:#fff; display:grid; place-items:center; padding:10px; text-align:center
+}
+.flip.safe .front{ background:#dcfce7 }
+.flip.unsafe .front{ background:#fee2e2 }
+.flip .front, .flip .back{ position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; display:grid; place-items:center; padding:14px }
+.flip .back{ transform:rotateY(180deg) }
+.flip.flipped .inner{ transform:rotateY(180deg) }
+
+/* ترتيب الخطوات (إنفوجرافيك حي) */
+.steps{ display:grid; gap:10px }
+.stepitem{
+  background:#fff; border:1px solid #e9ecef; border-radius:12px; padding:10px 12px;
+  display:flex; align-items:center; justify-content:space-between; gap:8px
+}
+.stepitem .title{ font-weight:900 }
+.stepitem .ctrls{ display:flex; gap:6px }
+.stepitem .ctrls button{ padding:6px 10px }
+
+/* كويز */
+.quiz .q-card{
+  border:1px solid #e9ecef; background:#ffffff; border-radius:18px; padding:16px; margin:12px 0;
+}
+.q-title{ font-weight:900; margin-bottom:8px }
+.q-opts{ display:grid; gap:10px }
+.q-opts .btn{ justify-content:space-between; display:flex; align-items:center }
+.correct{ outline:3px solid var(--accent) }
+.wrong{ outline:3px solid var(--danger) }
+.result{ font-weight:900; color:var(--accent); margin-top:8px }
 </style>
 </head>
 <body>
-<header><h1>الدروس التفاعلية</h1><div>من الصف الخامس إلى التاسع</div></header>
-<div class="container" id="cards"></div>
+
+<header>
+  <h1>الاستخدام الآمن لوسائل التواصل الاجتماعي</h1>
+  <div class="subtitle">محتوى تفاعلي ذكي بخط كبير وألوان مبهجة — إعداد: أ/ أحمد الضامري</div>
+</header>
+
+<div class="container">
+  <!-- شريط أدوات -->
+  <div class="toolbar">
+    <div class="badges">
+      <span class="badge">🎯 أهداف التعلم</span>
+      <span class="badge">🔐 الأمان الرقمي</span>
+      <span class="badge">🧠 المواطنة الرقمية</span>
+    </div>
+    <div class="soundbar">
+      <label class="hint">🔊 صوت
+        <input type="checkbox" id="soundToggle" checked />
+      </label>
+      <label class="hint">🔉 مستوى
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" />
+      </label>
+      <button class="btn btn-primary" id="demoSound">جرّب الصوت ▶️</button>
+    </div>
+  </div>
+
+  <!-- بطاقات متسلسلة وكبيرة -->
+  <section class="flow">
+
+    <article class="card">
+      <h2><span class="step">1</span> وصف الدرس</h2>
+      <p>
+        يهدف الدرس إلى تنمية وعي الطلبة بمخاطر وسائل التواصل الاجتماعي
+        وتمكينهم من ممارسة سلوك رقمي مسؤول عبر <b>تطبيق قواعد الأمان</b>،
+        واحترام <b>القوانين والملكية الفكرية</b>.
+      </p>
+      <div class="pills">
+        <span class="pill">تنمّر إلكتروني</span>
+        <span class="pill">حماية الخصوصية</span>
+        <span class="pill">التحقق بخطوتين</span>
+        <span class="pill">هوية رقمية</span>
+      </div>
+    </article>
+
+    <!-- ========= استراتيجيات التدريس: عصف ذهني ========= -->
+    <article class="card" id="s-brainstorm">
+      <h2><span class="step">2</span> العصف الذهني: «حائط المخاطر»</h2>
+      <p>أضف أكبر عدد من المخاطر المرتبطة بوسائل التواصل. سيجري النظام تصنيفًا ذكيًا ويعرض عدّادًا لكل فئة.</p>
+      <div class="activity">
+        <div class="tag">تفاعل فوري</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          <input id="ideaInput" placeholder="اكتب خطرًا مثل: انتحال الهوية / احتيال / تنمر..." style="flex:1; min-width:260px; font-size:18px; padding:10px 12px; border:1px solid #e2e8f0; border-radius:10px"/>
+          <button class="btn btn-primary" id="addIdea">إضافة</button>
+          <button class="btn" id="clearIdeas">إزالة الكل</button>
+        </div>
+        <div class="wall" id="ideaWall" aria-live="polite"></div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px">
+          <div class="chip"><small>🛡️ أمان/خصوصية</small> <b id="c-privacy">0</b></div>
+          <div class="chip"><small>💬 سلوك/تنمّر</small> <b id="c-behavior">0</b></div>
+          <div class="chip"><small>🎣 احتيال/روابط</small> <b id="c-phish">0</b></div>
+          <div class="chip"><small>🕒 وقت/إدمان</small> <b id="c-time">0</b></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========= استراتيجيات التدريس: التعلم التعاوني ========= -->
+    <article class="card" id="s-coop">
+      <h2><span class="step">3</span> التعلّم التعاوني: «بروتوكول الحماية»</h2>
+      <p>كوّن بروتوكول حماية لطالبة تتعرض لمضايقات. فعِّل عناصر الحماية وسيحسب النظام درجة الأمان.</p>
+      <div class="activity">
+        <div class="tag">المطلوب ≥ 80%</div>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px">
+          <label class="chip"><input type="checkbox" class="pp" data-w="25" /> تفعيل التحقق بخطوتين (2FA)</label>
+          <label class="chip"><input type="checkbox" class="pp" data-w="20" /> إخفاء الحساب عن غير المتابعين</label>
+          <label class="chip"><input type="checkbox" class="pp" data-w="15" /> إيقاف مشاركة «الموقع المباشر»</label>
+          <label class="chip"><input type="checkbox" class="pp" data-w="10" /> مراجعة الأذونات للتطبيقات المتصلة</label>
+          <label class="chip"><input type="checkbox" class="pp" data-w="15" /> استخدام كلمات مرور قوية ومختلفة</label>
+          <label class="chip"><input type="checkbox" class="pp" data-w="15" /> حظر المُسيئين والإبلاغ عنهم</label>
+        </div>
+        <div class="meter" style="margin-top:12px"><div class="v" id="safetyVal"></div></div>
+        <div style="display:flex; gap:8px; align-items:center; margin-top:8px">
+          <div><b>الدرجة الحالية:</b> <span id="scoreTxt">0%</span></div>
+          <button class="btn btn-primary" id="applyProtocol">تحقّق</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========= استراتيجيات التدريس: دراسة حالة ========= -->
+    <article class="card" id="s-case">
+      <h2><span class="step">4</span> دراسة حالة: «اختيارات مسؤولة»</h2>
+      <p>ستظهر حالة عشوائية. اختر الإجراء الأنسب. سيقدم النظام تغذية راجعة مبررة.</p>
+      <div class="activity">
+        <div class="tag">سيناريو عشوائي</div>
+        <div id="caseBox" style="font-weight:900; margin:8px 0"></div>
+        <div style="display:grid; gap:10px">
+          <button class="btn caseOpt" data-i="0"></button>
+          <button class="btn caseOpt" data-i="1"></button>
+          <button class="btn caseOpt" data-i="2"></button>
+        </div>
+        <div id="caseFeedback" class="result" style="display:none"></div>
+      </div>
+    </article>
+
+    <!-- ========= استراتيجيات التدريس: عرض توضيحي (محاكي الخصوصية) ========= -->
+    <article class="card" id="s-demo">
+      <h2><span class="step">5</span> العرض التوضيحي: «محاكي الخصوصية»</h2>
+      <p>حرّك الأزرار لتكوين إعدادات خصوصية آمنة. عند بلوغ الإعداد الآمن سيظهر إشعار نجاح.</p>
+      <div class="activity">
+        <div class="tag">محاكاة</div>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:8px">
+          <label class="chip"><input type="checkbox" class="sim" data-w="20" checked/> إخفاء الظهور للغرباء</label>
+          <label class="chip"><input type="checkbox" class="sim" data-w="25" checked/> تفعيل 2FA</label>
+          <label class="chip"><input type="checkbox" class="sim" data-w="15" /> إيقاف الموقع المباشر</label>
+          <label class="chip"><input type="checkbox" class="sim" data-w="20" /> طلب موافقة قبل الإشارة</label>
+          <label class="chip"><input type="checkbox" class="sim" data-w="10" /> مراجعة صلاحيات التطبيقات</label>
+          <label class="chip"><input type="checkbox" class="sim" data-w="10" /> إخفاء تاريخ الميلاد</label>
+        </div>
+        <div class="meter" style="margin-top:12px"><div class="v" id="simVal" style="width:45%"></div></div>
+        <div style="margin-top:8px"><b>مؤشر الأمان:</b> <span id="simTxt">45%</span></div>
+      </div>
+    </article>
+
+    <!-- ========= وسائل الإيضاح: بطاقات آمن/غير آمن ========= -->
+    <article class="card" id="v-flips">
+      <h2><span class="step">6</span> وسائل إيضاح: «آمن أم غير آمن؟»</h2>
+      <p>اقلب البطاقة لمعرفة التفسير.</p>
+      <div class="flipgrid">
+        <div class="flip safe">
+          <div class="inner">
+            <div class="front"><b>إخفاء الموقع الجغرافي</b></div>
+            <div class="back"><b>آمن</b> — يمنع التتبع. 👍</div>
+          </div>
+        </div>
+        <div class="flip unsafe">
+          <div class="inner">
+            <div class="front"><b>مشاركة الموقع المباشر علنًا</b></div>
+            <div class="back"><b>غير آمن</b> — قد يعرّضك لمخاطر. ⚠️</div>
+          </div>
+        </div>
+        <div class="flip safe">
+          <div class="inner">
+            <div class="front"><b>طلب موافقة قبل نشر صورة جماعية</b></div>
+            <div class="back"><b>آمن</b> — يحترم الخصوصية والحقوق. ✅</div>
+          </div>
+        </div>
+        <div class="flip unsafe">
+          <div class="inner">
+            <div class="front"><b>روابط هدايا مجهولة المصدر</b></div>
+            <div class="back"><b>غير آمن</b> — قد تكون تصيّدًا. 🚫</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px"><button class="btn" id="shuffleFlips">خلط البطاقات</button></div>
+    </article>
+
+    <!-- ========= وسائل الإيضاح: إنفوجرافيك حي (ترتيب الخطوات) ========= -->
+    <article class="card" id="v-steps">
+      <h2><span class="step">7</span> وسائل إيضاح: «سلم الحماية» (رتّب الخطوات)</h2>
+      <p>رتّب خطوات حماية الحساب بالترتيب الصحيح. عند النجاح ستسمع إشعارًا 🎉</p>
+      <div class="steps" id="stepsList"></div>
+      <div style="margin-top:8px"><button class="btn btn-primary" id="checkOrder">تحقق من الترتيب</button></div>
+    </article>
+
+    <!-- ========= اختبار 10 أسئلة ========= -->
+    <article class="card">
+      <h2><span class="step">8</span> اختبار تفاعلي (10 أسئلة)</h2>
+      <div class="quiz" id="quiz10"></div>
+    </article>
+
+  </section>
+</div>
+
 <script>
-const LESSONS=[
- {grade:8,title:"الاستخدام الآمن لوسائل التواصل",path:"8th/Social-Media/safe-social.html",desc:"درس تفاعلي مع اختبار."},
- {grade:7,title:"أسس اختيار الحاسوب",path:"7th/Choose-PC/index.html",desc:"مقدمة في مكونات الحاسوب."}
+/* ====================== نظام الصوت ====================== */
+const AUDIO_BASE = "assets/audio/";
+const sounds = {
+  click:"click.mp3",
+  page:"page-turn.mp3",
+  notify:"notification-pop.mp3",
+  clap:"clap.mp3",
+  wrong:"wrong_answer.mp3",
+  robot:"robot-voice.mp3",
+  fanfare:"royal-fanfare.mp3"
+};
+const audio = {};
+let soundOn = true, volume = 0.5;
+
+function loadAudio(){
+  for(const [k,f] of Object.entries(sounds)){
+    const a = new Audio(AUDIO_BASE + f);
+    a.preload = "auto"; a.volume = volume; audio[k] = a;
+  }
+}
+function play(name){
+  if(!soundOn) return;
+  const a = audio[name]; if(a){ try{ a.currentTime = 0; a.volume = volume; a.play(); }catch(e){} }
+}
+
+/* ====================== 2) العصف الذهني — حائط المخاطر ====================== */
+const catRules = [
+  {k:/خصوص|هوية|كلمة|مرور|حساب|خصوصية|ملف|صورة|موقع/i, id:"c-privacy"},
+  {k:/تنمر|سخر|إهان|إيذاء|ابتزاز|استفزاز/i, id:"c-behavior"},
+  {k:/رابط|احتيال|تصيد|هدي|ربح|كود|تحقق|OTP/i, id:"c-phish"},
+  {k:/وقت|إدمان|سهر|إلهاء|تشتيت/i, id:"c-time"},
 ];
-const cardsEl=document.getElementById("cards");
-LESSONS.forEach(it=>{
-  cardsEl.innerHTML+=`<div class="card"><h3>الصف ${it.grade}: ${it.title}</h3><p>${it.desc}</p><a class="btn" href="${it.path}">فتح الدرس 🚀</a></div>`;
+
+function addIdeaChip(text){
+  const wall = document.getElementById("ideaWall");
+  const chip = document.createElement("span");
+  chip.className = "chip";
+  chip.innerHTML = `<span>🧠 ${text}</span> <span class="x">✖</span>`;
+  chip.querySelector(".x").addEventListener("click", () => { chip.remove(); recount(); play("click"); });
+  wall.appendChild(chip);
+  play("click");
+  classify(text);
+}
+function classify(text){
+  let matched = false;
+  for(const r of catRules){
+    if(r.k.test(text)){ const b = document.getElementById(r.id); b.textContent = (+b.textContent + 1); matched = true; }
+  }
+  if(!matched){ /* لو لا ينطبق على قواعد محددة، نحسبه للخصوصية بشكل عام */ const b = document.getElementById("c-privacy"); b.textContent = (+b.textContent + 1); }
+}
+function recount(){
+  ["c-privacy","c-behavior","c-phish","c-time"].forEach(id => document.getElementById(id).textContent = "0");
+  document.querySelectorAll("#ideaWall .chip").forEach(ch => {
+    const t = ch.firstChild.textContent || "";
+    classify(t);
+  });
+}
+
+/* ====================== 3) التعلّم التعاوني — بروتوكول الحماية ====================== */
+function calcSafety(){
+  let s = 0;
+  document.querySelectorAll(".pp").forEach(cb => { if(cb.checked) s += (+cb.dataset.w||0); });
+  s = Math.min(100, s);
+  document.getElementById("safetyVal").style.width = s + "%";
+  document.getElementById("scoreTxt").textContent = s + "%";
+  return s;
+}
+
+/* ====================== 4) دراسة حالة — اختيارات مسؤولة ====================== */
+const CASES = [
+  {
+    t: "وصلك عرض فوز بهدية عبر رسالة خاصة مع رابط قصير.",
+    o: ["فتح الرابط الآن قبل انتهاء العرض","سؤال المرسل عن بياناته ومصدر العرض ثم الفتح","تجاهل/الإبلاغ عن الرسالة والتحقق عبر الموقع الرسمي"],
+    c: 2,
+    f: ["❌ مخاطرة عالية (تصيّد).","⚠️ ما يزال خطرًا لأن الرابط غير موثوق.","✅ الصحيح: لا تدخل بياناتك عبر روابط مجهولة — استخدم القنوات الرسمية."]
+  },
+  {
+    t: "زميل نشر صورتك دون إذن في حساب عام.",
+    o: ["طلب الإزالة بأدب ثم الإبلاغ إذا رفض","نشر تعليق جارح تحت الصورة","إعادة نشر الصورة مع سخرية"],
+    c: 0,
+    f: ["✅ يحترم الخصوصية والقانون.","❌ هذا تنمر يزيد المشكلة.","❌ يضاعف الضرر وينتهك حقوقًا."]
+  },
+  {
+    t: "تلقيت رسائل تهديد لابتزازك بعد نشر معلومات خاصة.",
+    o: ["التجاوب والدفع لإيقافه","التوقف عن التواصل وتوثيق الأدلة والتبليغ وطلب الدعم","حذف الحساب فقط"],
+    c: 1,
+    f: ["❌ الدفع لا يوقف الابتزاز غالبًا.","✅ وثّق وبلّغ واطلب مساندة رسمية/أسرية.","⚠️ الحذف وحده قد لا يحميك ولا يوقف الجاني."]
+  }
+];
+let currentCase = 0;
+function loadCase(){
+  currentCase = Math.floor(Math.random() * CASES.length);
+  const c = CASES[currentCase];
+  document.getElementById("caseBox").textContent = "⚖️ الحالة: " + c.t;
+  document.querySelectorAll(".caseOpt").forEach((b,i)=>{
+    b.disabled = false; b.classList.remove("correct","wrong");
+    b.textContent = c.o[i];
+  });
+  const fb = document.getElementById("caseFeedback");
+  fb.style.display = "none"; fb.textContent = "";
+}
+
+/* ====================== 5) العرض التوضيحي — محاكي الخصوصية ====================== */
+function calcSim(){
+  let s = 0;
+  document.querySelectorAll(".sim").forEach(cb => { if(cb.checked) s += (+cb.dataset.w||0); });
+  s = Math.min(100, s);
+  document.getElementById("simVal").style.width = s + "%";
+  document.getElementById("simTxt").textContent = s + "%";
+  if(s >= 80){ play("notify"); }
+}
+
+/* ====================== 6) وسائل إيضاح — بطاقات قلبية ====================== */
+function bindFlips(){
+  document.querySelectorAll(".flip").forEach(f=>{
+    f.addEventListener("click", ()=>{
+      f.classList.toggle("flipped");
+      play("page");
+    });
+  });
+}
+function shuffleFlips(){
+  const grid = document.querySelector(".flipgrid");
+  const arr = Array.from(grid.children);
+  arr.sort(()=> Math.random() - .5);
+  arr.forEach(el=> grid.appendChild(el));
+  play("click");
+}
+
+/* ====================== 7) وسائل إيضاح — ترتيب الخطوات (إنفوجرافيك حي) ====================== */
+const stepsTrueOrder = [
+  "إنشاء كلمة مرور قوية وفريدة",
+  "تفعيل التحقق بخطوتين (2FA)",
+  "مراجعة أذونات التطبيقات المرتبطة",
+  "إيقاف مشاركة الموقع المباشر",
+  "طلب موافقة قبل الإشارة/الوسم",
+];
+function renderSteps(){
+  const list = document.getElementById("stepsList");
+  const shuffled = [...stepsTrueOrder].sort(()=> Math.random()-.5);
+  list.innerHTML = "";
+  shuffled.forEach((title,idx)=>{
+    const row = document.createElement("div");
+    row.className = "stepitem"; row.dataset.title = title;
+    row.innerHTML = `
+      <span class="title">🔹 ${title}</span>
+      <span class="ctrls">
+        <button class="btn up">⬆️</button>
+        <button class="btn down">⬇️</button>
+      </span>`;
+    row.querySelector(".up").onclick = ()=>{ if(row.previousElementSibling){ row.parentElement.insertBefore(row, row.previousElementSibling); play("click"); } };
+    row.querySelector(".down").onclick = ()=>{ if(row.nextElementSibling){ row.parentElement.insertBefore(row.nextElementSibling, row); play("click"); } };
+    list.appendChild(row);
+  });
+}
+function checkOrder(){
+  const arr = Array.from(document.querySelectorAll("#stepsList .stepitem")).map(x=> x.dataset.title);
+  const ok = arr.every((t,i)=> t === stepsTrueOrder[i]);
+  if(ok){ play("fanfare"); toast("ترتيب صحيح! ممتاز 👏", true); }
+  else  { play("wrong");  toast("الترتيب غير صحيح — جرّب مرة أخرى.", false); }
+}
+function toast(msg,good){
+  const t = document.createElement("div");
+  t.textContent = msg;
+  t.style.cssText = `
+    position:fixed; bottom:24px; right:24px; z-index:9999; padding:12px 14px; border-radius:12px;
+    font-weight:900; background:${good?"#dcfce7":"#fee2e2"}; border:1px solid #e2e8f0; box-shadow:${good?"0 10px 20px rgba(34,197,94,.2)":"0 10px 20px rgba(239,68,68,.2)"};
+  `;
+  document.body.appendChild(t);
+  setTimeout(()=> t.remove(), 2000);
+}
+
+/* ====================== 8) اختبار 10 أسئلة ====================== */
+const QUIZ_QUESTIONS = [
+  { q:"أفضل وصف لكلمة المرور القوية هو:", a:["قصيرة وسهلة مثل 123456","تتضمن أحرفًا كبيرة وصغيرة وأرقامًا ورموزًا وطول 12+","نفس كلمة مرور البريد","اسمك مع سنة ميلادك"], c:1 },
+  { q:"ماذا تفعل عند استلام رابط غريب من مجهول؟", a:["أفتحه مباشرة","أشاركه مع الأصدقاء","أتجاهله/أتحقق أولًا وأستخدم ماسح الروابط","أرد برسالة شخصية"], c:2 },
+  { q:"أي مما يلي يُعد تنمرًا إلكترونيًا؟", a:["نقد بنّاء للفكرة","مراسلات لطيفة","سخرية متكررة ورسائل جارحة ونشر شائعات","عدم الرد"], c:2 },
+  { q:"نشر الموقع الجغرافي في الوقت الحقيقي:", a:["آمن دائمًا","قد يعرّضك لمخاطر التتبع أو السرقة","مطلوب لكل التطبيقات","لا تأثير له"], c:1 },
+  { q:"أفضل إجراء عند التعرّض لابتزاز بعد مشاركة صورة خاصة:", a:["الدفع فورًا","حذف الحساب والاختفاء","توثيق الأدلة والتوقف عن التفاعل والتبليغ وطلب المساندة","مجادلة المبتز"], c:2 },
+  { q:"التحقق بخطوتين (2FA) يعني:", a:["فتح الحساب من جهازين","طبقة أمان برمز للهاتف/التطبيق","تغيير كلمة المرور يوميًا","السماح للجميع بالرؤية"], c:1 },
+  { q:"ما الإجراء الصحيح عند رؤية محتوى منتهك لحقوق الملكية؟", a:["إعادة نشره بلا ذكر المصدر","نسبه لنفسي","ذكر المصدر أو طلب الإذن أو الامتناع عن النشر","تغيير لون الصورة ثم نشرها"], c:2 },
+  { q:"قبل نشر صورة جماعية لزملائك:", a:["انشرها فورًا","اطلب موافقتهم واحترم من يرفض الظهور","ضع فلاتر جميلة فقط","انشرها منتصف الليل"], c:1 },
+  { q:"علامة واضحة على حساب مزيف:", a:["صورة ملف عالية الجودة","اسم موثق رسميًا","طلب بيانات شخصية سريعًا وروابط غريبة وتاريخ منشورات محدود","منشورات قديمة ومتنوعة"], c:2 },
+  { q:"إذا نشرت معلومة خاصة بالخطأ:", a:["اتركها كما هي","احذف فورًا وراجع من شاهد وعدّل الخصوصية وتعلم من الموقف","احجب صديقًا واحدًا","أغلق الهاتف يومًا"], c:1 }
+];
+function renderQuiz10(containerId="quiz10"){
+  const host = document.getElementById(containerId);
+  if(!host) return;
+
+  let score = 0;
+  let answered = 0;
+
+  const head = document.createElement("div");
+  head.className = "q-card";
+  head.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+      <div class="q-title">اختر الإجابة الصحيحة لكل سؤال</div>
+      <div class="hint">💡 أنهِ جميع الأسئلة ثم اضغط <span class="kbd">عرض النتيجة</span></div>
+    </div>`;
+  host.appendChild(head);
+
+  QUIZ_QUESTIONS.forEach((item, idx)=>{
+    const card = document.createElement("div");
+    card.className = "q-card";
+    card.innerHTML = `
+      <div class="q-title">س${idx+1} | ${item.q}</div>
+      <div class="q-opts"></div>
+      <div class="result" hidden>إجابة صحيحة! 👏</div>
+    `;
+    const opts = card.querySelector(".q-opts");
+    item.a.forEach((text, i)=>{
+      const btn = document.createElement("button");
+      btn.className = "btn";
+      btn.type = "button";
+      btn.innerHTML = `<span>${text}</span><span>●</span>`;
+      btn.addEventListener("click", ()=>{
+        if(btn.dataset.locked === "1") return;
+        [...opts.children].forEach(b => { b.disabled = true; b.dataset.locked = "1"; b.classList.remove("correct","wrong"); });
+        const ok = (i === item.c);
+        if(ok){ btn.classList.add("correct"); card.querySelector(".result").hidden = false; score++; play("clap"); confetti(12); }
+        else  { btn.classList.add("wrong"); play("wrong"); }
+        answered++;
+      });
+      opts.appendChild(btn);
+    });
+    host.appendChild(card);
+  });
+
+  const footer = document.createElement("div");
+  footer.className = "q-card";
+  footer.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div id="scoreText">النتيجة: 0 / ${QUIZ_QUESTIONS.length}</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-primary" id="showScore">عرض النتيجة</button>
+        <button class="btn" id="retry">إعادة المحاولة</button>
+      </div>
+    </div>
+  `;
+  host.appendChild(footer);
+
+  footer.querySelector("#showScore").addEventListener("click", ()=>{
+    const scoreEl = footer.querySelector("#scoreText");
+    scoreEl.textContent = `النتيجة: ${score} / ${QUIZ_QUESTIONS.length}`;
+    if(answered === QUIZ_QUESTIONS.length){
+      if(score >= 8){ play("fanfare"); confetti(28); }
+      else { play("notify"); }
+    }else{
+      play("notify");
+      scoreEl.textContent += " — أكمل جميع الأسئلة أولًا ✅";
+    }
+  });
+  footer.querySelector("#retry").addEventListener("click", ()=>{
+    play("page");
+    host.innerHTML = ""; renderQuiz10(containerId);
+  });
+}
+
+/* ============ مؤثرات عامة ============ */
+function confetti(n=20){
+  for(let i=0;i<n;i++){
+    const s = document.createElement("span");
+    const size = 7 + Math.random()*10;
+    s.style.cssText = `
+      position:fixed; width:${size}px; height:${size}px; border-radius:3px;
+      background: hsl(${Math.random()*360}, 85%, 60%);
+      top:-10px; right:${Math.random()*100}vw; transform:rotate(${Math.random()*360}deg);
+      pointer-events:none; z-index:9999; box-shadow:0 0 6px rgba(0,0,0,.15)
+    `;
+    document.body.appendChild(s);
+    const endY = window.innerHeight + 50;
+    const drift = (Math.random()*.6 + .2) * (Math.random()<.5? -1:1);
+    s.animate([
+      { transform:`translate(0,0) rotate(0deg)` },
+      { transform:`translate(${drift*60}px, ${endY}px) rotate(360deg)` }
+    ], { duration: 1800 + Math.random()*900, easing:"cubic-bezier(.2,.6,.2,1)", fill:"forwards" });
+    setTimeout(()=> s.remove(), 2800);
+  }
+}
+
+/* ============ تهيئة الصفحة وربط الأحداث ============ */
+document.addEventListener("DOMContentLoaded", ()=>{
+  loadAudio();
+
+  // شريط الصوت
+  document.getElementById("demoSound").addEventListener("click", ()=> play("notify"));
+  document.getElementById("soundToggle").addEventListener("change", e => {
+    soundOn = e.target.checked; if(soundOn) play("click");
+  });
+  document.getElementById("volume").addEventListener("input", e => {
+    volume = parseFloat(e.target.value);
+    Object.values(audio).forEach(a => a.volume = volume);
+  });
+
+  /* العصف الذهني */
+  document.getElementById("addIdea").onclick = ()=>{
+    const input = document.getElementById("ideaInput");
+    const v = (input.value||"").trim();
+    if(!v) return;
+    addIdeaChip(v); input.value = "";
+  };
+  document.getElementById("clearIdeas").onclick = ()=>{
+    document.getElementById("ideaWall").innerHTML = "";
+    recount(); play("page");
+  };
+
+  /* بروتوكول الحماية */
+  document.querySelectorAll(".pp").forEach(cb=> cb.onchange = ()=> { play("click"); });
+  document.getElementById("applyProtocol").onclick = ()=>{
+    const s = calcSafety();
+    if(s >= 80){ play("fanfare"); confetti(24); }
+    else{ play("notify"); }
+  };
+  calcSafety();
+
+  /* دراسة حالة */
+  loadCase();
+  document.querySelectorAll(".caseOpt").forEach((b,idx)=>{
+    b.onclick = ()=>{
+      const C = CASES[currentCase];
+      const ok = (idx === C.c);
+      document.querySelectorAll(".caseOpt").forEach(x=> x.disabled = true);
+      const fb = document.getElementById("caseFeedback");
+      fb.style.display = "block"; fb.textContent = C.f[idx];
+      if(ok){ b.classList.add("correct"); play("clap"); confetti(12); }
+      else  { b.classList.add("wrong"); play("wrong"); }
+      // زر للمحاولة بسيناريو آخر
+      setTimeout(()=>{ play("page"); loadCase(); }, 2500);
+    };
+  });
+
+  /* محاكي الخصوصية */
+  document.querySelectorAll(".sim").forEach(cb=> cb.onchange = ()=> { calcSim(); play("click"); });
+  calcSim();
+
+  /* البطاقات القلبية */
+  bindFlips();
+  document.getElementById("shuffleFlips").onclick = shuffleFlips;
+
+  /* ترتيب الخطوات */
+  renderSteps();
+  document.getElementById("checkOrder").onclick = checkOrder;
+
+  /* الكويز */
+  renderQuiz10();
 });
 </script>
-<p><a href="https://git-scm.com/download/win">Download Git for Windows</a></p>
 </body>
 </html>

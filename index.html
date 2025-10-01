@@ -1,298 +1,0 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>الدروس التفاعلية – تقنية المعلومات (٥–٩)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<meta name="color-scheme" content="light">
-<style>
-:root{
-  --bg-1:#f0f9ff;      /* سماوي فاتح */
-  --bg-2:#fff7ed;      /* برتقالي كريمي */
-  --bg-3:#fdf2f8;      /* وردي فاتح */
-  --ink:#0f172a;       /* نص */
-  --muted:#475569;     /* ثانوي */
-  --brand:#06b6d4;     /* سماوي */
-  --brand-2:#a855f7;   /* بنفسجي */
-  --accent:#22c55e;    /* أخضر */
-  --ring:#e2e8f0;      /* حدود */
-  --card:#ffffff;      /* بطاقة */
-  --radius:24px;
-  --shadow:0 18px 40px rgba(15,23,42,.12);
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; color:var(--ink);
-  background:
-    radial-gradient(1400px 900px at 110% -10%, var(--bg-3) 0%, transparent 60%),
-    radial-gradient(1200px 800px at -10% 110%, var(--bg-2) 0%, transparent 60%),
-    linear-gradient(120deg, var(--bg-1), #ffffff 50%, var(--bg-1));
-  font-family:"Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", sans-serif;
-  line-height:1.85;
-}
-/* زخرفة نقطية خفيفة */
-body:before{
-  content:""; position:fixed; inset:0; pointer-events:none; opacity:.5;
-  background-image: radial-gradient(#0000000d 1px, transparent 1px); background-size:18px 18px;
-}
-/* رأس الصفحة */
-header{padding:26px 16px 10px; text-align:center}
-h1{margin:0; font-size:clamp(28px,4.2vw,48px); font-weight:900;
-  background:linear-gradient(90deg,var(--brand),var(--brand-2));
-  -webkit-background-clip:text; background-clip:text; color:transparent}
-.subtitle{color:var(--muted); font-size:clamp(16px,2.2vw,20px); margin-top:6px}
-.container{width:min(1240px,92vw); margin:18px auto 90px}
-
-/* شريط أدوات */
-.toolbar{
-  display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap;
-  background:linear-gradient(180deg, #ffffffcc, #ffffff);
-  border:1px solid var(--ring); border-radius:18px; padding:12px 14px; box-shadow:var(--shadow)
-}
-.searchbar{
-  display:flex; gap:8px; flex:1; min-width:280px; align-items:center
-}
-.searchbar input{
-  flex:1; font-size:18px; padding:10px 12px; border:1px solid var(--ring); border-radius:12px; background:#fff
-}
-.filters{display:flex; gap:8px; flex-wrap:wrap}
-select, button{
-  appearance:none; font-size:16px; font-weight:800; cursor:pointer;
-  border:1px solid var(--ring); background:#fff; color:#0b3b4f;
-  padding:10px 12px; border-radius:12px; transition:.2s transform,.2s box-shadow
-}
-button:hover, select:hover{ transform:translateY(-1px); box-shadow:0 8px 16px rgba(2,132,199,.15) }
-.btn-primary{ background:linear-gradient(90deg, #a5f3fc, #e9d5ff) }
-
-/* شبكة البطاقات */
-.grid{ display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(12,1fr) }
-.card{
-  grid-column:span 12; background:var(--card); border:1px solid var(--ring); border-radius:var(--radius);
-  padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden
-}
-@media(min-width:900px){ .span-6{grid-column:span 6} .span-4{grid-column:span 4} }
-.card h3{margin:4px 0 8px; font-size:clamp(20px,2.6vw,26px); font-weight:900}
-.meta{display:flex; gap:8px; flex-wrap:wrap; color:#065f46; font-weight:800}
-.tag{background:#dcfce7; border:1px solid #bbf7d0; padding:4px 8px; border-radius:999px; font-size:14px}
-.desc{color:#334155; font-size:clamp(16px,1.8vw,18px); margin:8px 0 12px}
-.actions{display:flex; gap:8px; flex-wrap:wrap}
-a.btn{ text-decoration:none; display:inline-flex; align-items:center; gap:6px }
-
-/* شارة الصف */
-.badge-grade{
-  position:absolute; top:12px; inset-inline-start:12px;
-  background:linear-gradient(135deg,#a5f3fc,#e9d5ff); border:1px solid var(--ring);
-  color:#0f172a; font-weight:900; border-radius:10px; padding:6px 10px; font-size:14px
-}
-
-/* فاصل قسم */
-.section-title{
-  margin:22px 4px 10px; font-size:clamp(22px,2.8vw,28px); font-weight:900; color:#0f172a
-}
-.helper{ color:#475569; font-size:15px }
-footer{ text-align:center; color:#64748b; padding:20px 10px }
-.small{font-size:14px}
-</style>
-</head>
-<body>
-
-<header>
-  <h1>الدروس التفاعلية — تقنية المعلومات (الصف ٥ إلى ٩)</h1>
-  <div class="subtitle">واجهة مرتبة حسب المرحلة، مع بحث وفلاتر — إعداد: أ/ أحمد الضامري</div>
-</header>
-
-<div class="container">
-
-  <!-- شريط الأدوات: بحث + فلاتر -->
-  <div class="toolbar">
-    <div class="searchbar">
-      <input id="q" type="search" placeholder="ابحث باسم الدرس أو الكلمات المفتاحية… (مثال: تواصل، حاسوب، قواعد البيانات)" />
-      <button class="btn-primary" id="btnSearch">بحث</button>
-    </div>
-    <div class="filters">
-      <select id="gradeFilter" title="اختر الصف">
-        <option value="">كل الصفوف</option>
-        <option value="5">الصف الخامس</option>
-        <option value="6">الصف السادس</option>
-        <option value="7">الصف السابع</option>
-        <option value="8">الصف الثامن</option>
-        <option value="9">الصف التاسع</option>
-      </select>
-      <select id="topicFilter" title="اختر الموضوع">
-        <option value="">كل الموضوعات</option>
-        <option>الشبكات والتواصل</option>
-        <option>الجداول الحسابية</option>
-        <option>الأمن الرقمي</option>
-        <option>الوسائط المتعددة</option>
-        <option>اختيار الحاسوب</option>
-        <option>قواعد البيانات</option>
-        <option>البرمجة/المنطق</option>
-      </select>
-      <button id="reset">إعادة الضبط</button>
-    </div>
-  </div>
-
-  <div class="section-title">الدروس</div>
-  <div class="helper small">اختر درسًا لفتحه مباشرة. يمكنك إضافة المزيد لاحقًا مع الحفاظ على نفس الهيكل.</div>
-
-  <!-- شبكة البطاقات -->
-  <section id="cards" class="grid"></section>
-
-  <footer>
-    <div>© جميع الحقوق محفوظة – تقنية المعلومات (٥–٩)</div>
-    <div class="small">نصائح GitHub Pages: ضع هذا الملف في الجذر، وفعّل Pages من الإعدادات. روابط الدروس تعمل مباشرة داخل المستودع أيضًا.</div>
-  </footer>
-</div>
-
-<script>
-/* ===================== بيانات الدروس بروابط GitHub Pages ===================== */
-const PAGES_ROOT = "https://a7mdooh.github.io/Interactive-Lessons";
-const LESSONS = [
-  /* الصف الخامس */
-  {
-    grade:5, topic:"الأمن الرقمي",
-    title:"المواطنة الرقمية الأساسية",
-    path:`${PAGES_ROOT}/5th/Digital-Citizenship/index.html`,
-    desc:"مبادئ الهوية الرقمية، كلمات المرور، السلوك اللائق عبر الإنترنت.",
-    tags:["هوية رقمية","أمن","سلوك"]
-  },
-
-  /* الصف السادس */
-  {
-    grade:6, topic:"الجداول الحسابية",
-    title:"الجداول الحسابية – تنظيم البيانات",
-    path:`${PAGES_ROOT}/6th/Spreadsheets/index.html`,
-    desc:"تنسيق الخلايا، الدوال الأساسية، الفرز والتصفية.",
-    tags:["Excel","تنظيم البيانات","دوال"]
-  },
-  {
-    grade:6, topic:"الوسائط المتعددة",
-    title:"النمذجة ثلاثية الأبعاد – مقدمة",
-    path:`${PAGES_ROOT}/6th/3D-Modeling/index.html`,
-    desc:"مفاهيم النمذجة باستخدام Tinkercad وأنشطة تطبيقية.",
-    tags:["3D","تصميم","Tinkercad"]
-  },
-  {
-    grade:6, topic:"الشبكات والتواصل",
-    title:"الشبكات والأدوات – الإنترنت والتواصل",
-    path:`${PAGES_ROOT}/6th/Networks-and-Tools/index.html`,
-    desc:"مفاهيم أساسية للإنترنت وأدوات التعاون.",
-    tags:["شبكات","تواصل","إنترنت"]
-  },
-
-  /* الصف السابع */
-  {
-    grade:7, topic:"اختيار الحاسوب",
-    title:"أسس اختيار الحاسوب الشخصي",
-    path:`${PAGES_ROOT}/7th/Choose-a-PC/index.html`,
-    desc:"معالج، ذاكرة، تخزين، شاشة، بطاقة رسومية—كيف تختار حسب احتياجك.",
-    tags:["CPU","RAM","Storage"]
-  },
-  {
-    grade:7, topic:"الوسائط المتعددة",
-    title:"تحرير الوسائط – الصوت والفيديو",
-    path:`${PAGES_ROOT}/7th/Multimedia-Editing/index.html`,
-    desc:"مراحل إنتاج فيلم قصير، التحرير الصوتي والمرئي.",
-    tags:["MovieMaker","Audacity","إنتاج"]
-  },
-  {
-    grade:7, topic:"الأمن الرقمي",
-    title:"الخدمات الإلكترونية والأمن",
-    path:`${PAGES_ROOT}/7th/E-Services-and-Security/index.html`,
-    desc:"التسوق الإلكتروني، تقييم المعلومات، الوعي الأمني.",
-    tags:["E-Services","Security"]
-  },
-
-  /* الصف الثامن */
-  {
-    grade:8, topic:"الشبكات والتواصل",
-    title:"الاستخدام الآمن لوسائل التواصل",
-    path:`${PAGES_ROOT}/8th/Social%20Media/safe-social.html`,
-    desc:"مخاطر التواصل وطرق الحماية + أنشطة تفاعلية واختبار 10 أسئلة.",
-    tags:["تواصل اجتماعي","أمن","2FA","تنمر"]
-  },
-  {
-    grade:8, topic:"البرمجة/المنطق",
-    title:"أساسيات البرمجة والمنطق",
-    path:`${PAGES_ROOT}/8th/Programming-Basics/index.html`,
-    desc:"مفاهيم المتغيرات، الشروط، والحلقات بأسلوب بصري.",
-    tags:["Logic","Variables","Loops"]
-  },
-
-  /* الصف التاسع */
-  {
-    grade:9, topic:"قواعد البيانات",
-    title:"قواعد البيانات – الجداول والعلاقات",
-    path:`${PAGES_ROOT}/9th/Databases/index.html`,
-    desc:"التخطيط لقاعدة بيانات، العلاقات، الاستعلامات، التقارير.",
-    tags:["Access","Relations","Queries"]
-  },
-  {
-    grade:9, topic:"الشبكات والتواصل",
-    title:"محاكاة الشبكات وأمنها",
-    path:`${PAGES_ROOT}/9th/Networks/index.html`,
-    desc:"Packet Tracer، ربط الأجهزة، أساسيات أمن الشبكات.",
-    tags:["Networks","Security","PT"]
-  }
-];
-
-/* ===================== بناء البطاقات ===================== */
-const cardsEl = document.getElementById("cards");
-function render(list){
-  cardsEl.innerHTML = "";
-  if(!list.length){
-    cardsEl.innerHTML = `<div class="card"><h3>لا توجد نتائج</h3><div class="desc">عدّل معايير البحث أو الفلاتر.</div></div>`;
-    return;
-  }
-  list.forEach(item=>{
-    const card = document.createElement("article");
-    card.className = "card span-6";
-    const folderUrl = item.path.substring(0, item.path.lastIndexOf('/'));
-    card.innerHTML = `
-      <div class="badge-grade">الصف ${item.grade}</div>
-      <h3>${item.title}</h3>
-      <div class="meta">
-        <span class="tag">${item.topic}</span>
-        ${item.tags.map(t=>`<span class="tag">#${t}</span>`).join("")}
-      </div>
-      <div class="desc">${item.desc}</div>
-      <div class="actions">
-        <a class="btn btn-primary" href="${item.path}" target="_blank" rel="noopener">🚀 فتح الدرس</a>
-        <a class="btn" href="${folderUrl}" target="_blank" rel="noopener">📁 فتح المجلد</a>
-      </div>
-    `;
-    cardsEl.appendChild(card);
-  });
-}
-
-/* ===================== البحث والفلاتر ===================== */
-const q = document.getElementById("q");
-const gradeFilter = document.getElementById("gradeFilter");
-const topicFilter = document.getElementById("topicFilter");
-document.getElementById("btnSearch").onclick = applyFilters;
-document.getElementById("reset").onclick = ()=>{
-  q.value=""; gradeFilter.value=""; topicFilter.value=""; applyFilters();
-};
-[q, gradeFilter, topicFilter].forEach(el=> el.addEventListener("input", applyFilters));
-
-function applyFilters(){
-  const term = (q.value||"").trim().toLowerCase();
-  const g = gradeFilter.value;
-  const t = (topicFilter.value||"").trim();
-  const out = LESSONS.filter(it=>{
-    const okG = !g || String(it.grade) === g;
-    const okT = !t || it.topic === t;
-    const txt = [it.title, it.topic, it.desc, ...(it.tags||[])].join(" ").toLowerCase();
-    const okQ = !term || txt.includes(term);
-    return okG && okT && okQ;
-  });
-  render(out);
-}
-
-/* ===================== تهيئة ===================== */
-render(LESSONS);
-</script>
-</body>
-</html>

@@ -1,0 +1,19 @@
+# استبعاد مجلد assets لأنه مرفوع مسبقاً
+assets/
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
+
+# ملفات المحرر
+.vscode/
+*.swp
+*.swo
+
+# ملفات Node.js (إذا كانت موجودة)
+node_modules/
+npm-debug.log*
+
+# ملفات مؤقتة
+*.tmp
+*.temp
